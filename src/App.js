@@ -22,8 +22,10 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div className='center'>
-      <LoginForm></LoginForm>
+    <div className='background'>
+        <div className='center'>
+            <LoginForm></LoginForm>
+        </div>
     </div>
   );
 }

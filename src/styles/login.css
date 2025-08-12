@@ -1,21 +1,69 @@
-.center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/*
+MOST OF THE STYLE DONE BY CHATGPT
+*/
+
+.background {
+    background-color: #333;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
 }
 
 .container {
-    border: 2px solid black;
-    height: 200px;  
-    width: 200px;
-    display: flex;
-    flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px 30px;
+  width: 320px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
 }
 
-.formItem{
-    margin-top: 10px;
+.formItem {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-.button{
-    width: 100px;
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px #007bff;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 12px;
+  width: 100%;
+  font-weight: 600;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
 }
