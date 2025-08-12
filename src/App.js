@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import LoginForm from "./components/auth/loginForm.tsx";
+import "./styles/login.css"
 
 
 function App() {
@@ -21,7 +22,9 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <LoginForm></LoginForm>
+    <div className='center'>
+      <LoginForm></LoginForm>
+    </div>
   );
 }
 

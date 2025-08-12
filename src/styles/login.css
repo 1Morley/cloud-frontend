@@ -1,0 +1,21 @@
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    border: 2px solid black;
+    height: 200px;  
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.formItem{
+    margin-top: 10px;
+}
+
+.button{
+    width: 100px;
+}

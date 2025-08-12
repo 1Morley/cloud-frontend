@@ -1,15 +1,41 @@
+import { useState } from "react";
+import "../../styles/login.css";
+
 export default function LoginForm(){
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+
+    //TODO this needs to be completed and tested with the actual end point
+    async function onClickLogin(){
+
+        try {
+            //TODO fetch the end point
+            const res = await fetch("", {
+                method: "GET",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body: JSON.stringify({email, password})
+            })
+        }
+        catch {
+
+        }
+    }
+
+    //TODO maybe make this look nice
     return (
-        <div>
-            <div>
+        <div className="container">
+            <div className="formItem">
                 <label>Email</label>
-                <input type="text"/>
+                <input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             </div>
-            <div>
+            <div className="formItem">
                 <label>Password</label>
-                <input type="text"/>
+                <input type="text" placeholder="password" value={password} onChange={(p) => setPassword(p.target.value)}/>
             </div>
-            <button>Login</button>
+            <button className="button" onClick={onClickLogin}>Login</button>
         </div>
     )
 }
