@@ -8,7 +8,7 @@ import {
     Outlet,
 } from "react-router-dom";
 import './App.css';
-import LoginForm from "./components/auth/loginForm.tsx";
+import LoginPage from "./views/login.tsx";
 import { Home } from "./components/songstuff/homePage.js";
 import "./styles/login.css"
 
@@ -41,7 +41,7 @@ function App() {
       <Routes>
         <Route path="/login" element={
           <div className='center'>
-            <LoginForm></LoginForm>
+            <LoginPage></LoginPage>
           </div>
           }></Route>
           <Route path="/" element={<Home/>}></Route>

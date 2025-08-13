@@ -10,8 +10,8 @@ export default function LoginForm(){
     async function onClickLogin(){
 
         try {
-            //TODO fetch the end point
-            const res = await fetch("", {
+            //TODO change the endpoint 
+            const res = await fetch("localhost:3003/login", {
                 method: "GET",
                 headers: {
                     "Content-type" : "application/json"
