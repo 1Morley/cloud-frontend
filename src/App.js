@@ -1,6 +1,15 @@
 import logo from './logo.svg';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link,
+    useNavigate,
+    Outlet,
+} from "react-router-dom";
 import './App.css';
 import LoginForm from "./components/auth/loginForm.tsx";
+import { Home } from "./components/songstuff/homePage.js";
 import "./styles/login.css"
 
 
@@ -22,12 +31,49 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div className='background'>
-        <div className='center'>
+
+    // <div className='center'>
+    //   <LoginForm></LoginForm>
+    // </div>
+
+    <Router>
+      {Header()}
+      <Routes>
+        <Route path="/login" element={
+          <div className='center'>
             <LoginForm></LoginForm>
-        </div>
-    </div>
+          </div>
+          }></Route>
+          <Route path="/" element={<Home/>}></Route>
+      </Routes>
+      {Footer()}
+    </Router>
   );
+}
+
+function Header (){
+return (
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>                
+                </ul>
+            </nav>
+        )
+}
+
+function Footer(){
+    return (
+        <footer>
+            <h3>I never know what to put in the footer :/</h3>
+            <p>{"foot".repeat(100)}</p>
+        </footer>
+
+    );
 }
 
 export default App;
