@@ -66,11 +66,12 @@ return (
         )
 }
 
+//TODO um the footer was breaking some of my pages lmao
 function Footer(){
     return (
         <footer>
             <h3>I never know what to put in the footer :/</h3>
-            <p>{"foot".repeat(100)}</p>
+            {/* <p>{"foot".repeat(100)}</p> */}
         </footer>
 
     );

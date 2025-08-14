@@ -36,9 +36,9 @@ export default function LoginForm(){
             </div>
             <div className="formItem">
                 <label>Password</label>
-                <input type="text" placeholder="password" value={password} onChange={(p) => setPassword(p.target.value)}/>
+                <input type="password" placeholder="password" value={password} onChange={(p) => setPassword(p.target.value)}/>
             </div>
             <button className="button" onClick={onClickLogin}>Login</button>
         </div>
     )
-}
+}   
