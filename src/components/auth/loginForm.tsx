@@ -1,9 +1,11 @@
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 import "../../styles/login.css";
 
 export default function LoginForm(){
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const nav = useNavigate();
 
 
     //TODO this needs to be completed and tested with the actual end point
@@ -11,20 +13,21 @@ export default function LoginForm(){
 
         try {
             //TODO change the endpoint 
-            const res = await fetch("localhost:3003/login", {
-                method: "GET",
-                headers: {
-                    "Content-type" : "application/json"
-                },
-                body: JSON.stringify({email, password})
-            })
+            // const res = await fetch("localhost:3003/login", {
+            //     method: "GET",
+            //     headers: {
+            //         "Content-type" : "application/json"
+            //     },
+            //     body: JSON.stringify({email, password})
+            // });
+
+            nav("/");
         }
         catch {
 
         }
     }
 
-    //TODO maybe make this look nice
     return (
         <div className="container">
             <div className="formItem">
