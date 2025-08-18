@@ -46,7 +46,7 @@ function App() {
           }></Route>
           <Route path="/" element={<Home/>}></Route>
       </Routes>
-      {Footer()}
+      {/* {Footer()} */}
     </Router>
   );
 }

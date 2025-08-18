@@ -1,6 +1,6 @@
 li{
   display: inline-block;
-  padding-right: 20px;
+  padding-right: 5px;
 }
 
 .songDisplay{
@@ -8,15 +8,17 @@ li{
     background-color: aquamarine;
     width: var(--width);
     height: calc(var(--width) + 50px);
+
 }
 
-.songDisplay p{
+p{
     margin-block-start: 0px;
     margin-left: 10px;
     margin-right: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 20px;
 }
 
 a{
@@ -29,4 +31,26 @@ a{
     height: calc(var(--width) - var(--imageSpace));
     object-fit: contain;
     margin: calc(var(--imageSpace) / 2);
+}
+
+.audioDisplay {
+    --width: 350px;
+    height: 100%;
+    width: var(--width);
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    background-color: #bcb2b2;
+    margin-top: 60px;
+}
+
+.audioDisplay img{
+    --imageSpace: 10px;
+    width: calc(var(--width) - var(--imageSpace));
+    height: calc(var(--width) - var(--imageSpace));
+    object-fit: contain;
+}
+
+.mainBody{
+    margin-left: 370px;
 }
