@@ -153,6 +153,3 @@ function AudioPlayer(){
 //todo make default view for music + minimize
 //todo make uploud audio thing
 
-
-
-

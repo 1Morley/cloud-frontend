@@ -11,6 +11,7 @@ import './App.css';
 import LoginPage from "./views/login.tsx";
 import { Home } from "./components/songstuff/homePage.js";
 import "./styles/login.css"
+import Main from "./views/main.jsx"
 
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
             <LoginPage></LoginPage>
           </div>
           }></Route>
-          <Route path="/" element={<Home/>}></Route>
+          <Route path="/" element={<Main/>}></Route>
+          {/* <Route path='/main' element={<Main />}></Route> */}
       </Routes>
       {/* {Footer()} */}
     </Router>
@@ -52,18 +54,18 @@ function App() {
 }
 
 function Header (){
-return (
-            <nav>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/login">Login</Link>
-                    </li>                
-                </ul>
-            </nav>
-        )
+// return (
+//             <nav>
+//                 <ul>
+//                     <li>
+//                         <Link to="/">Home</Link>
+//                     </li>
+//                     <li>
+//                         <Link to="/login">Login</Link>
+//                     </li>                
+//                 </ul>
+//             </nav>
+//         )
 }
 
 //TODO um the footer was breaking some of my pages lmao

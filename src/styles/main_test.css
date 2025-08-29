@@ -1,0 +1,33 @@
+.main-container {
+  display: flex;
+  justify-content: center; /* center the center-div horizontally */
+  align-items: center;
+  height: 300px;
+  border: 3px solid limegreen;
+}
+
+.nav-left,
+.center-div,
+.nav-right {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Set widths */
+.nav-left,
+.nav-right {
+  width: 300px;
+  border: 3px solid red;
+}
+
+.center-div {
+  width: 500px;
+  border: 3px solid black;
+}
+
+/* Remove any gaps between the divs */
+.main-container > * {
+  margin: 0;
+}

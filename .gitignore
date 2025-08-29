@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/example_music
 
 # testing
 /coverage

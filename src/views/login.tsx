@@ -10,18 +10,8 @@ export default function Login() {
     <div className="background">
       <div className="formWrapper">
         <div className="tabButtons">
-          <button
-            className={currentForm === "login" ? "active" : ""}
-            onClick={() => setCurrentForm("login")}
-          >
-            Login
-          </button>
-          <button
-            className={currentForm === "signup" ? "active" : ""}
-            onClick={() => setCurrentForm("signup")}
-          >
-            Sign Up
-          </button>
+          <button className={currentForm === "login" ? "active" : ""} onClick={() => setCurrentForm("login")}> Login </button>
+          <button className={currentForm === "signup" ? "active" : ""} onClick={() => setCurrentForm("signup")} >Sign Up </button>
         </div>
 
         <div className="currentForm">
