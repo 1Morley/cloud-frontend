@@ -1,27 +1,56 @@
 import "../../styles/login.css";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 import {useNavigate} from "react-router-dom";
+import {
+  CognitoIdentityProviderClient,
+  SignUpCommand,
+} from "@aws-sdk/client-cognito-identity-provider";
 
 export default function SignUpForm(){
     const methods = useForm();
     const {register, handleSubmit, formState: { errors }} = methods;
+    const client = new CognitoIdentityProviderClient({ region: "us-east-1" });
 
-    const submitForm = handleSubmit(data => {
-        console.log("function ran")
-        console.log(data.password);
-    });
+
+    //TODO needs client
+    //TODO i might need to remove email
+    //this was created by chatgpt
+    async function submitForm(username, password, email) {
+        try {
+            const command = new SignUpCommand({
+            ClientId: "79djcu7dlr9fs3tds5hf53fsoj",
+            Username: username,
+            Password: password,
+            UserAttributes: [
+                {
+                Name: "email",
+                Value: email,
+                },
+            ],
+            });
+
+            const response = await client.send(command);
+            console.log("Signup success:", response);
+            return response;
+        } 
+        catch (err) {
+            console.error("Signup error:", err);
+            throw err;
+        }
+    }
+
 
     //TODO i might need to write something to check if a username is unique
     return (
         <FormProvider {...methods}>
-            <form onSubmit={submitForm} noValidate className="Container">
+            <form onSubmit={handleSubmit((data) => submitForm(data.username, data.password, data.email))} noValidate className="Container">
                 <div className="formItem">
                     <label>First Name</label>
                     <input type="text" placeholder="first name" {...register("firstName", {
                         required: "First name is required",
                     })}/>
                     {errors.firstName && (
-                        <span className="error-message">{errors.firstName.message as string}</span>
+                        <span className="error-message">{errors.firstName.message}</span>
                     )}
                 </div>
                 <div className="formItem">
@@ -30,7 +59,7 @@ export default function SignUpForm(){
                         required: "Last name is required"
                     })}/>
                     {errors.lastName && (
-                        <span className="error-message">{errors.lastName.message as string}</span>
+                        <span className="error-message">{errors.lastName.message}</span>
                     )}
                 </div>
                 <div className="formItem">
@@ -39,7 +68,7 @@ export default function SignUpForm(){
                         required: "Username is required"
                     })}/>
                     {errors.username && (
-                        <span className="error-message">{errors.username.message as string}</span>
+                        <span className="error-message">{errors.username.message}</span>
                     )}
                 </div>
                 <div className="formItem">
@@ -52,7 +81,7 @@ export default function SignUpForm(){
                         }
                     })}/>
                     {errors.email && (
-                        <span className="error-message">{errors.email.message as string}</span>
+                        <span className="error-message">{errors.email.message}</span>
                     )}
                 </div>
                 <div className="formItem">
@@ -65,7 +94,7 @@ export default function SignUpForm(){
                         }
                     })}/>
                     {errors.password && (
-                        <span className="error-message">{errors.password.message as string}</span>
+                        <span className="error-message">{errors.password.message}</span>
                     )}
                 </div>
                 <button className="button" type="submit">Sign Up</button>

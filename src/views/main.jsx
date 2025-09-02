@@ -2,6 +2,7 @@ import "../styles/main.css";
 import { MusicProvider } from "../components/home/musicContext";
 import { SongList } from "../components/home/songList";
 import { AudioPlayer } from "../components/home/audioPlayer";
+import { useNavigate } from "react-router-dom";
 import mfAudio from "../example_music/Potholderz.mp3";
 import cover from "../example_music/mmfood.jpg";
 import beerAudio from "../example_music/OneBeer.mp3";
@@ -12,6 +13,12 @@ export default function Main() {
     { title: "Potholderz", mp3: mfAudio, image: cover },
     { title: "One Beer", mp3: beerAudio, image: beerCover }
   ];
+
+  const navigate = useNavigate();
+
+  function go_to_login(){
+    navigate("/login")
+  }
 
   return (
     <MusicProvider>
@@ -30,9 +37,9 @@ export default function Main() {
             </div>
           </div>
           <div className="nav-right">
-            <p>Right</p>
+            <button onClick={go_to_login}>Login/SignUp</button>
           </div>
-        </div>
+        </div>  
       </div>
     </MusicProvider>
   );
@@ -42,7 +49,11 @@ export default function Main() {
 function display_music(musicList){
   //TODO this is where the fetch request should be made
   return (
-    
     <SongComponent musicList={musicList} />
   )
+}
+
+//todo check if the user has a valid session
+function is_logged_in(){
+  
 }

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 
+//claude took the original audio player/music list and broke it into 3 different components for better styling 
 export const MusicContext = createContext({
   title: "",
   setTitle: () => {},

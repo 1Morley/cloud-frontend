@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MusicContext } from "./musicContext";
 
+//claude took the original audio player/music list and broke it into 3 different components for better styling 
 export function AudioPlayer() {
 const { title, mp3, image, volume, setVolume } = useContext(MusicContext);
 const [currentTime, setCurrentTime] = useState(0);

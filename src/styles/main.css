@@ -1,4 +1,4 @@
-/* stlye done by claude */
+/* style done by claude */
 * {
   margin: 0;
   padding: 0;
@@ -41,6 +41,14 @@ body {
   height: 0;
 }
 
+/* Right sidebar container - for positioning */
+.nav-right {
+  padding: 0;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
 /* Center content area - centered on screen */
 .center-div {
   background: rgba(255, 255, 255, 0.03);
@@ -56,9 +64,29 @@ body {
   position: relative;
 }
 
-/* Right sidebar - hide for now */
+/* Right sidebar - matching audio player styling */
 .nav-right {
-  display: none;
+  padding: 0;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+/* Right sidebar display - positioned relative to center div */
+.rightDisplay {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: calc(-320px - 20px);
+  top: 0;
+  width: 320px;
+  min-height: 700px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Center buttons */
@@ -328,6 +356,10 @@ input[type="range"]::-moz-range-thumb {
   .center-div {
     width: 600px;
   }
+  
+  .nav-right {
+    width: 280px;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -341,6 +373,13 @@ input[type="range"]::-moz-range-thumb {
     width: 100%;
     max-width: 600px;
     margin-bottom: 20px;
+  }
+  
+  .nav-right {
+    position: static;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
   }
   
   .center-div {
