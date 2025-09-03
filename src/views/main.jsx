@@ -26,23 +26,24 @@ export default function Main() {
 
   function is_logged_in(){
     let session = localStorage.getItem("SessionInformation")
-    let session_json = JSON.parse(session)
-    let access_token = session_json.AccessToken
 
-    if (access_token) {
-      let decoded_token = JSON.parse(atob(access_token.split('.')[1]))
-      const now = Math.floor(Date.now() / 1000);
-      if (decoded_token.exp > now) {
-        return (
-          <button onClick={to_profile}>Profile</button>
-        )
+    if(session != null){
+      let session_json = JSON.parse(session)
+      let access_token = session_json.AccessToken
+
+      if (access_token) {
+        let decoded_token = JSON.parse(atob(access_token.split('.')[1]))
+        const now = Math.floor(Date.now() / 1000);
+        if (decoded_token.exp > now) {
+          return (
+            <button onClick={to_profile}>Profile</button>
+          )
+        }
       }
     }
-    else {
-        return (
-          <button onClick={to_login}>Login/SignUp</button>
-        )
-    }
+    return (
+      <button onClick={to_login}>Login/SignUp</button>
+    )
   }
 
   return (

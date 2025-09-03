@@ -9,7 +9,7 @@ export default function LoginForm(){
     const nav = useNavigate();
     const methods = useForm();
     const {register, handleSubmit, formState: { errors }} = methods;
-   const client = new CognitoIdentityProviderClient({ region: "us-east-1" });
+    const client = new CognitoIdentityProviderClient({ region: "us-east-1" });
     const clientId = "79djcu7dlr9fs3tds5hf53fsoj";
     const clientSecret = "16samauoorblf4pmk71ceoirkju2bgs61t0c4akase452a0b3dgb";   
 
