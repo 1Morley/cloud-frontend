@@ -109,6 +109,30 @@ body {
   transform: translateY(0);
 }
 
+.profile-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #333;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: #ff6b6b;
+  color: white;
+}
+
+.profile-btn:hover {
+  background: #ff5252;
+  color: white;
+  text-decoration: none;
+}
+
 /* Song list container */
 .center-content {
   flex: 1;

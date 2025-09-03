@@ -2,15 +2,14 @@ import "../styles/main.css";
 import { MusicProvider } from "../components/home/musicContext";
 import { SongList } from "../components/home/songList";
 import { AudioPlayer } from "../components/home/audioPlayer";
-import mfAudio from "../example_music/Potholderz.mp3";
-import cover from "../example_music/mmfood.jpg";
-import beerAudio from "../example_music/OneBeer.mp3";
-import beerCover from "../example_music/onebeer.jpg";
+import { Link } from "react-router-dom";
+import mfAudio from "../tempMusic/audio.mp3";
+import beerAudio from "../tempMusic/disAudio.mp3";
 
 export default function Main() {
   const exampleMusic = [
-    { title: "Potholderz", mp3: mfAudio, image: cover },
-    { title: "One Beer", mp3: beerAudio, image: beerCover }
+    { title: "Audio Track 1", mp3: mfAudio, image: null },
+    { title: "Audio Track 2", mp3: beerAudio, image: null }
   ];
 
   return (
@@ -24,6 +23,9 @@ export default function Main() {
             <div className="center-buttons">
               <button className="action-button">Music</button>
               <button className="action-button">Playlist</button>
+              <Link to="/profile" className="profile-btn">
+                Profile
+              </Link>
             </div>
             <div className="center-content">
               <SongList musicList={exampleMusic} />
@@ -42,7 +44,6 @@ export default function Main() {
 function display_music(musicList){
   //TODO this is where the fetch request should be made
   return (
-    
-    <SongComponent musicList={musicList} />
+    <SongList musicList={musicList} />
   )
 }
