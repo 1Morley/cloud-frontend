@@ -20,6 +20,31 @@ export default function Main() {
     navigate("/login")
   }
 
+  function to_profile(){
+    
+  }
+
+  function is_logged_in(){
+    let session = localStorage.getItem("SessionInformation")
+    let session_json = JSON.parse(session)
+    let access_token = session_json.AccessToken
+
+    if (access_token) {
+      let decoded_token = JSON.parse(atob(access_token.split('.')[1]))
+      const now = Math.floor(Date.now() / 1000);
+      if (decoded_token.exp > now) {
+        return (
+          <button onClick={go_to_login}>Profile</button>
+        )
+      }
+    }
+    else {
+        return (
+          <button onClick={go_to_login}>Login/SignUp</button>
+        )
+    }
+  }
+
   return (
     <MusicProvider>
       <div className="page-wrapper">
@@ -37,23 +62,10 @@ export default function Main() {
             </div>
           </div>
           <div className="nav-right">
-            <button onClick={go_to_login}>Login/SignUp</button>
+            {is_logged_in()}
           </div>
         </div>  
       </div>
     </MusicProvider>
   );
-}
-
-//TODO this should probably make the list and not take it as a parameter
-function display_music(musicList){
-  //TODO this is where the fetch request should be made
-  return (
-    <SongComponent musicList={musicList} />
-  )
-}
-
-//todo check if the user has a valid session
-function is_logged_in(){
-  
 }

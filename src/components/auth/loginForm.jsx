@@ -30,7 +30,7 @@ export default function LoginForm(){
             const res = await client.send(command);
 
             if (res.AuthenticationResult) {
-                sessionStorage.setItem("SessionInformation", JSON.stringify(res.AuthenticationResult));
+                localStorage.setItem("SessionInformation", JSON.stringify(res.AuthenticationResult));
                 nav("/");
             } 
             else {
