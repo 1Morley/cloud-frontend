@@ -3,15 +3,15 @@ import { MusicProvider } from "../components/home/musicContext";
 import { SongList } from "../components/home/songList";
 import { AudioPlayer } from "../components/home/audioPlayer";
 import { useNavigate } from "react-router-dom";
-import mfAudio from "../example_music/Potholderz.mp3";
-import cover from "../example_music/mmfood.jpg";
-import beerAudio from "../example_music/OneBeer.mp3";
-import beerCover from "../example_music/onebeer.jpg";
+// import mfAudio from "../example_music/Potholderz.mp3";
+// import cover from "../example_music/mmfood.jpg";
+// import beerAudio from "../example_music/OneBeer.mp3";
+// import beerCover from "../example_music/onebeer.jpg";
 
 export default function Main() {
   const exampleMusic = [
-    { title: "Potholderz", mp3: mfAudio, image: cover },
-    { title: "One Beer", mp3: beerAudio, image: beerCover }
+    { title: "Potholderz", mp3: null, image: null },
+    { title: "One Beer", mp3: null, image: null }
   ];
 
   const navigate = useNavigate();
