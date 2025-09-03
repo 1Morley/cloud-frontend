@@ -57,7 +57,12 @@ export function Home(){
     return (
         <savedSong.Provider value={value}>
             <div className="mainBody">
-                <h2>Home Page</h2>
+                <div className="home-header">
+                    <h2>Home Page</h2>
+                    <Link to="/profile" className="profile-btn">
+                        Profile
+                    </Link>
+                </div>
                 <ul>
                     <ListItems list={exampleMusic} />
                 </ul>

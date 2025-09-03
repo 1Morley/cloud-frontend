@@ -10,6 +10,7 @@ import {
 import './App.css';
 import LoginPage from "./views/login.jsx";
 import { Home } from "./components/songstuff/homePage.js";
+import ProfilePage from "./components/profile/ProfilePage.tsx";
 import "./styles/login.css"
 import Main from "./views/main.jsx"
 import { UploadForm } from "./components/songstuff/uploadForm.js";
@@ -48,6 +49,7 @@ function App() {
           </div>
           }></Route>
           <Route path="/" element={<Main/>}></Route>
+          <Route path="/profile" element={<ProfilePage/>}></Route>
           {/* <Route path='/main' element={<Main />}></Route> */}
       </Routes>
       {/* {Footer()} */}
