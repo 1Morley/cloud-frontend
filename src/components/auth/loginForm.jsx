@@ -2,37 +2,50 @@ import { useState } from "react";
 import {useNavigate} from "react-router-dom";
 import { FormProvider, useForm} from "react-hook-form";
 import "../../styles/login.css";
+import { AuthFlowType, CognitoIdentityProviderClient, InitiateAuthCommand } from "@aws-sdk/client-cognito-identity-provider";
+import { getSecretHash } from "../../utils/hash";
 
 export default function LoginForm(){
     const nav = useNavigate();
     const methods = useForm();
     const {register, handleSubmit, formState: { errors }} = methods;
+   const client = new CognitoIdentityProviderClient({ region: "us-east-1" });
+    const clientId = "79djcu7dlr9fs3tds5hf53fsoj";
+    const clientSecret = "16samauoorblf4pmk71ceoirkju2bgs61t0c4akase452a0b3dgb";   
 
-    async function submitForm(username, password){
-    //TODO this needs to be the cognito url
-        const res = await fetch("https://us-east-15deghugpi.auth.us-east-1.amazoncognito.com/oauth/token", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+    async function submitForm(data) {
+        let hash = await getSecretHash(clientId, clientSecret, data.username)
+
+        try {
+            const command = new InitiateAuthCommand({
+            AuthFlow: AuthFlowType.USER_PASSWORD_AUTH,
+            AuthParameters: {
+                USERNAME: data.username,
+                PASSWORD: data.password,
+                SECRET_HASH: hash
             },
-            //TODO get te client id
-            body: new URLSearchParams({
-                grant_type: "password",
-                username: username,
-                password: password
-            })
-        })
+            ClientId: clientId,
+            });
 
-        if (res.ok){
-            let data = JSON.stringify(await res.json())
-            sessionStorage.setItem("SessionInformation", data)
-            nav("/")
+            const res = await client.send(command);
+
+            if (res.AuthenticationResult) {
+                sessionStorage.setItem("SessionInformation", JSON.stringify(res.AuthenticationResult));
+                nav("/");
+            } 
+            else {
+                console.error("Unexpected response:", res);
+            }
+
+        } catch (err) {
+            throw err
         }
-    };
+    }
+
 
     return (
         <FormProvider {...methods}>
-            <form className="Container" noValidate onSubmit={submitForm}>
+            <form className="container" noValidate onSubmit={handleSubmit(submitForm)}>
                 <div className="formItem">
                     <label>Username</label>
                     <input type="text" placeholder="username" {...register("username", {
@@ -43,7 +56,7 @@ export default function LoginForm(){
                         //     message: "Invalid email address"
                         // }
                     })}/>
-                    {errors.email && (
+                    {errors.email && (  
                         <span className="error-message">{errors.email.message}</span>
                     )}
                 </div>

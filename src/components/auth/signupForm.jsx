@@ -1,6 +1,7 @@
 import "../../styles/login.css";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { FormProvider, useForm} from "react-hook-form";
 import {useNavigate} from "react-router-dom";
+import { getSecretHash } from "../../utils/hash";
 import {
   CognitoIdentityProviderClient,
   SignUpCommand,
@@ -10,40 +11,36 @@ export default function SignUpForm(){
     const methods = useForm();
     const {register, handleSubmit, formState: { errors }} = methods;
     const client = new CognitoIdentityProviderClient({ region: "us-east-1" });
+    const clientId = "79djcu7dlr9fs3tds5hf53fsoj";
+    const clientSecret = "16samauoorblf4pmk71ceoirkju2bgs61t0c4akase452a0b3dgb";   
 
 
-    //TODO needs client
     //TODO i might need to remove email
-    //this was created by chatgpt
-    async function submitForm(username, password, email) {
+    async function submitForm(data) {
+        let hash = await getSecretHash(clientId, clientSecret, data.username)
+
         try {
             const command = new SignUpCommand({
-            ClientId: "79djcu7dlr9fs3tds5hf53fsoj",
-            Username: username,
-            Password: password,
-            UserAttributes: [
-                {
-                Name: "email",
-                Value: email,
-                },
-            ],
-            });
+                ClientId: clientId,
+                SecretHash: hash,
+                Username: data.username,
+                Password: data.password,
+                UserAttributes: [{Name: "email", Value: data.email}]
+            })
 
-            const response = await client.send(command);
-            console.log("Signup success:", response);
-            return response;
-        } 
-        catch (err) {
-            console.error("Signup error:", err);
-            throw err;
+            const response = await client.send(command)
+            console.log(response)
+            return response
+        }
+        catch(err) {
+            throw err
         }
     }
-
 
     //TODO i might need to write something to check if a username is unique
     return (
         <FormProvider {...methods}>
-            <form onSubmit={handleSubmit((data) => submitForm(data.username, data.password, data.email))} noValidate className="Container">
+            <form onSubmit={handleSubmit(submitForm)} noValidate className="container">
                 <div className="formItem">
                     <label>First Name</label>
                     <input type="text" placeholder="first name" {...register("firstName", {
@@ -65,7 +62,11 @@ export default function SignUpForm(){
                 <div className="formItem">
                     <label>Username</label>
                     <input type="text" placeholder="username" {...register("username", {
-                        required: "Username is required"
+                        required: "Username is required",
+                         pattern: {
+                            value: /^[A-Za-z0-9_.@+-]+$/,
+                            message: "Invalid username"
+                        }
                     })}/>
                     {errors.username && (
                         <span className="error-message">{errors.username.message}</span>

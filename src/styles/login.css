@@ -1,55 +1,83 @@
-/*
-STYLING DONE BY CHATGPT
-*/
-/* Full-page background */
+/**
+STYLING UPDATED BY CLAUDE TO MATCH HOMEPAGE
+**/
+/* Full-page background - matching homepage gradient */
 .background {
   height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-} 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 20px;
+  overflow-x: hidden;
+}
 
-/* Container for the forms */
+/* Container for the forms - glassmorphism design */
 .formWrapper {
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  width: 350px;
-  padding: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  width: 400px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  color: #ffffff;
 }
 
-/* Tab buttons */
+/* Tab buttons - matching homepage button style */
 .tabButtons {
   display: flex;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  margin-bottom: 30px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tabButtons button {
   flex: 1;
-  padding: 12px 0;
+  padding: 14px 0;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  background-color: #f0f0f0;
-  transition: background-color 0.2s ease;
+  font-size: 15px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.tabButtons button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.tabButtons button:hover::before {
+  left: 100%;
 }
 
 .tabButtons button:hover {
-  background-color: #e0e0e0;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .tabButtons button.active {
-  background-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 /* Current form container */
@@ -65,57 +93,96 @@ STYLING DONE BY CHATGPT
 }
 
 .formItem {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
 }
 
 label {
-  font-weight: 600;
-  margin-bottom: 5px;
-  color: #333;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
 }
 
 input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: border-color 0.2s ease;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 4px #667eea;
+  border-color: rgba(102, 126, 234, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  transform: translateY(-1px);
 }
 
-/* Submit button */
+/* Submit button - matching homepage action buttons */
 .button {
   margin-top: 20px;
-  padding: 12px;
+  padding: 16px 24px;
   font-weight: 600;
+  font-size: 16px;
   color: white;
-  background-color: #667eea;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.button:hover::before {
+  left: 100%;
 }
 
 .button:hover {
-  background-color: #5a67d8;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
 }
 
+.button:active {
+  transform: translateY(0);
+}
+
+/* Error message styling */
 .error-message {
-  margin-top: 5px;
-  font-size: 12px;
-  color: #e53e3e; /* nice red */
-  background-color: rgba(229, 62, 62, 0.1);
-  padding: 4px 8px;
-  border-radius: 4px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  padding: 8px 12px;
+  border-radius: 8px;
   font-weight: 500;
   animation: fadeIn 0.3s ease-in-out;
+  backdrop-filter: blur(10px);
 }
 
 /* Smooth fade-in for when errors appear */
@@ -127,5 +194,33 @@ input:focus {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .background {
+    padding: 16px;
+  }
+  
+  .formWrapper {
+    width: 100%;
+    max-width: 350px;
+    padding: 30px 25px;
+  }
+  
+  .tabButtons button {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+  
+  input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  
+  .button {
+    padding: 14px 20px;
+    font-size: 15px;
   }
 }
