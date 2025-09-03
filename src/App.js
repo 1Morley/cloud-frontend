@@ -8,7 +8,7 @@ import {
     Outlet,
 } from "react-router-dom";
 import './App.css';
-import LoginPage from "./views/login.tsx";
+import LoginPage from "./views/login.jsx";
 import { Home } from "./components/songstuff/homePage.js";
 import ProfilePage from "./components/profile/ProfilePage.tsx";
 import "./styles/login.css"
