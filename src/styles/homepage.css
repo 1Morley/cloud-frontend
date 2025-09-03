@@ -5,7 +5,7 @@ li{
 
 .songDisplay{
     --width: 200px;
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     width: var(--width);
     height: calc(var(--width) + 50px);
 

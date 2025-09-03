@@ -8,7 +8,7 @@ import {
     useNavigate,
     Outlet,
 } from "react-router-dom";
-import "../../styles/homepage.css";
+// import "../../styles/homepage.css";
 import ooAudio from '../../tempMusic/audio.mp3'
 import disAudio from '../../tempMusic/disAudio.mp3'
 import { useContext, useMemo, useEffect } from "react";
