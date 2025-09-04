@@ -140,7 +140,7 @@ function FormDisplay() {
 
             console.log('Sending request to uploadMusic endpoint...');
 
-            const response = await fetch('https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/uploadMusic', {
+            const response = await fetch('https://8q2ltlh8xd.execute-api.us-east-1.amazonaws.com/uploadMusic', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
