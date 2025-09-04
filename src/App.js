@@ -50,7 +50,7 @@ function App() {
           }></Route>
           <Route path="/" element={<Main/>}></Route>
           <Route path="/profile" element={<ProfilePage/>}></Route>
-          {/* <Route path='/main' element={<Main />}></Route> */}
+          <Route path='/upload' element={<UploadForm />}></Route>
       </Routes>
       {/* {Footer()} */}
     </Router>

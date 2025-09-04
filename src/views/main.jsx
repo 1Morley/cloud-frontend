@@ -4,6 +4,7 @@ import { SongList } from "../components/home/songList"
 import { AudioPlayer } from "../components/home/audioPlayer"
 import { useNavigate } from "react-router-dom"
 import { hasValidToken } from "../utils/user.js"
+import { UploadForm } from "../components/songstuff/uploadForm.js";
 // import mfAudio from "../example_music/Potholderz.mp3"
 // import cover from "../example_music/mmfood.jpg"
 // import beerAudio from "../example_music/OneBeer.mp3"
@@ -31,7 +32,7 @@ export default function Main() {
   }
 
   function toUpload(){
-
+    navigate("/upload")
   }
 
   function isLoggedIn(){
@@ -51,6 +52,7 @@ export default function Main() {
 
   return (
     <MusicProvider>
+      {/* <UploadForm></UploadForm> for testing*/}
       <div className="page-wrapper">
         <div className="main-container">
           <div className="nav-left">
