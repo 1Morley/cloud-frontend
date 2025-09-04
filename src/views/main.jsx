@@ -1,48 +1,51 @@
 import "../styles/main.css";
-import { MusicProvider } from "../components/home/musicContext";
-import { SongList } from "../components/home/songList";
-import { AudioPlayer } from "../components/home/audioPlayer";
-import { useNavigate } from "react-router-dom";
-// import mfAudio from "../example_music/Potholderz.mp3";
-// import cover from "../example_music/mmfood.jpg";
-// import beerAudio from "../example_music/OneBeer.mp3";
-// import beerCover from "../example_music/onebeer.jpg";
+import { MusicProvider } from "../components/home/musicContext"
+import { SongList } from "../components/home/songList"
+import { AudioPlayer } from "../components/home/audioPlayer"
+import { useNavigate } from "react-router-dom"
+import { hasValidToken } from "../utils/user.js"
+// import mfAudio from "../example_music/Potholderz.mp3"
+// import cover from "../example_music/mmfood.jpg"
+// import beerAudio from "../example_music/OneBeer.mp3"
+// import beerCover from "../example_music/onebeer.jpg"
 
 export default function Main() {
+  // const exampleMusic = [
+  //   { title: "Potholderz", artist: "MF DOOM", releaseDate: "September 2, 2003", mp3: mfAudio, image: cover },
+  //   { title: "One Beer", artist: "MF DOOM", releaseDate: "November 16, 2004", mp3: beerAudio, image: beerCover }
+  // ];
+
   const exampleMusic = [
-    { title: "Potholderz", mp3: null, image: null },
-    { title: "One Beer", mp3: null, image: null }
+    { title: "Potholderz", artist: "MF DOOM", releaseDate: "September 2, 2003", mp3: null, image: null },
+    { title: "One Beer", artist: "MF DOOM", releaseDate: "November 16, 2004", mp3: null, image: null }
   ];
 
   const navigate = useNavigate();
 
-  function to_login(){
+  function toLogin(){
     navigate("/login")
   }
 
-  function to_profile(){
+  function toProfile(){
     navigate("/profile")
   }
 
-  function is_logged_in(){
-    let session = localStorage.getItem("SessionInformation")
+  function toUpload(){
 
-    if(session != null){
-      let session_json = JSON.parse(session)
-      let access_token = session_json.AccessToken
+  }
 
-      if (access_token) {
-        let decoded_token = JSON.parse(atob(access_token.split('.')[1]))
-        const now = Math.floor(Date.now() / 1000);
-        if (decoded_token.exp > now) {
-          return (
-            <button onClick={to_profile}>Profile</button>
-          )
-        }
-      }
+  function isLoggedIn(){
+    if (hasValidToken()) {
+      return (
+        <div class="nav-right logged-in-buttons">
+          <button className="nav-button" onClick={toProfile}>Profile</button>
+          <button className="nav-button" onClick={toUpload}>Upload Song</button>
+        </div>
+      )
     }
-    return (
-      <button onClick={to_login}>Login/SignUp</button>
+
+    return(
+      <button className="nav-button" onClick={toLogin}>Login/SignUp</button>
     )
   }
 
@@ -66,7 +69,7 @@ export default function Main() {
             </div>
           </div>
           <div className="nav-right">
-            {is_logged_in()}
+            {isLoggedIn()}
           </div>
         </div>  
       </div>

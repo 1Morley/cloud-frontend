@@ -1,6 +1,6 @@
+//claude took the original audio player/music list and broke it into 3 different components for better styling 
 import React, { createContext, useState, useEffect } from "react";
 
-//claude took the original audio player/music list and broke it into 3 different components for better styling 
 export const MusicContext = createContext({
   title: "",
   setTitle: () => {},
@@ -8,6 +8,10 @@ export const MusicContext = createContext({
   setMp3: () => {},
   image: "",
   setImage: () => {},
+  artist: "",
+  setArtist: () => {},
+  releaseDate: "",
+  setReleaseDate: () => {},
   volume: 1,
   setVolume: () => {}
 });
@@ -16,9 +20,14 @@ export function MusicProvider({ children }) {
   const [title, setTitle] = useState("");
   const [mp3, setMp3] = useState(null);
   const [image, setImage] = useState("");
+  const [artist, setArtist] = useState("");
+  const [releaseDate, setReleaseDate] = useState("");
   const [volume, setVolume] = useState(1);
 
-  const value = { title, mp3, image, volume, setTitle, setMp3, setImage, setVolume };
+  const value = { 
+    title, mp3, image, artist, releaseDate, volume, 
+    setTitle, setMp3, setImage, setArtist, setReleaseDate, setVolume 
+  };
 
   useEffect(() => {
     if (mp3) {

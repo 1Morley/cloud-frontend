@@ -1,89 +1,90 @@
 import React, { useContext, useState, useEffect } from "react";
 import { MusicContext } from "./musicContext";
 
-//claude took the original audio player/music list and broke it into 3 different components for better styling 
 export function AudioPlayer() {
-const { title, mp3, image, volume, setVolume } = useContext(MusicContext);
-const [currentTime, setCurrentTime] = useState(0);
+  const { title, mp3, image, artist, releaseDate, volume, setVolume } = useContext(MusicContext);
+  const [currentTime, setCurrentTime] = useState(0);
 
-useEffect(() => {
+  useEffect(() => {
     const timer = setInterval(() => {
-    setCurrentTime(() => {
+      setCurrentTime(() => {
         if (mp3) {
-        return mp3.currentTime;
+          return mp3.currentTime;
         } else {
-        return 0;
+          return 0;
         }
-    });
+      });
     }, 500);
     return () => clearInterval(timer);
-});
+  });
 
-const start = () => {
+  const start = () => {
     if (mp3) {
-    mp3.play();
+      mp3.play();
     }
-};
+  };
 
-const stop = () => {
+  const stop = () => {
     if (mp3) {
-    mp3.pause();
+      mp3.pause();
     }
-};
+  };
 
-const updateVolume = (event) => {
+  const updateVolume = (event) => {
     setVolume(event.target.value);
-};
+  };
 
-const updateDuration = (event) => {
+  const updateDuration = (event) => {
     if (mp3.ended) {
-    mp3.play();
+      mp3.play();
     }
     let newTime = event.target.value;
     mp3.currentTime = newTime;
     setCurrentTime(newTime);
-};
+  };
 
-if (mp3) {
+  if (mp3) {
     return (
-    <div className="audioDisplay">
+      <div className="audioDisplay">
         <div className="audio-info">
-        <img src={image} alt={title} />
-        <p>Title: "{title}"</p>
+          <img src={image} alt={title} />
+          <p>Title: "{title}"</p>
+          <p>Artist: {artist}</p>
+          <p>Release Date: {releaseDate}</p>
         </div>
         <div className="playback-controls">
-        <button onClick={start}>Play</button>
-        <button onClick={stop}>Stop</button>
+          <button onClick={start}>Play</button>
+          <button onClick={stop}>Stop</button>
         </div>
         <div className="slider-container">
-        <div className="slider-row">
+          <div className="slider-row">
             <span className="slider-label">Volume</span>
-            <input 
-            type="range" 
-            min="0" 
-            max="1" 
-            step={0.01} 
-            value={volume} 
-            onChange={updateVolume}
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step={0.01}
+              value={volume}
+              onChange={updateVolume}
             />
-        </div>
-        <div className="slider-row">
+          </div>
+          <div className="slider-row">
             <span className="slider-label">Progress</span>
-            <input 
-            type="range" 
-            min="0" 
-            max={mp3.duration || 0} 
-            value={currentTime} 
-            step={1} 
-            onChange={updateDuration}
+            <input
+              type="range"
+              min="0"
+              max={mp3.duration || 0}
+              value={currentTime}
+              step={1}
+              onChange={updateDuration}
             />
-        </div>
-        <div className="time-display">
+          </div>
+          <div className="time-display">
             Time: {Math.floor(currentTime)}s
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     );
-}
-return null; // Don't render anything if no song is selected
+  }
+  return null;
 }
