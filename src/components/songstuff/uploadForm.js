@@ -97,12 +97,16 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    MusicId: 1,
-                    CoverImage: imageLink,
-                    Title: title,
-                    ReleaseDate: releaseDate,
-                    Artist: artist,
-                    Producer: producer
+                    metadata: {
+                        MusicId: 1,
+                        CoverImage: imageLink,
+                        Title: title,
+                        ReleaseDate: releaseDate,
+                        Artist: artist,
+                        Producer: producer
+                    },
+                    file_base64: mp3File,
+                    filename: title + ".mp3"
                 })
             }
 
