@@ -1,31 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 import './profile.css';
-
-interface UserProfile {
-  username: string;
-  email: string;
-  joinDate: string;
-  favoriteGenres: string[];
-  totalPlaylists: number;
-  totalSongs: number;
-}
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
-  
-  // Mock user data - in a real app this would come from authentication context/state
-  const [userProfile, setUserProfile] = useState<UserProfile>({
-    username: 'MusicLover123',
-    email: 'musiclover@example.com',
-    joinDate: 'January 2024',
-    favoriteGenres: ['Rock', 'Jazz', 'Electronic', 'Classical'],
-    totalPlaylists: 8,
-    totalSongs: 156
+
+  const [userProfile, setUserProfile] = useState({
+    username: '',
+    email: '',
+    joinDate: '',
+    favoriteGenres: [],
+    totalPlaylists: 0,
+    totalSongs: 0
   });
 
-  const [editForm, setEditForm] = useState<UserProfile>(userProfile);
+  const [editForm, setEditForm] = useState(userProfile);
+
+  //TODO load user profile using playlist data might need to remove the join date and favorite genres
+  useEffect(() => {
+    function loadUserProfile() {
+      let session = localStorage.getItem("SessionInformation");
+      if (session != null) {
+        let sessionJson = JSON.parse(session);
+        if (sessionJson.IdToken) {
+          let jwtData = jwtDecode(sessionJson.IdToken);
+          setUserProfile({
+            username: jwtData['cognito:username'],
+            email: jwtData.email,
+            joinDate: 'January 2024', // replace with real join date if available
+            favoriteGenres: [],
+            totalPlaylists: 0,
+            totalSongs: 0
+          });
+          setEditForm(userProfile)
+        }
+      }
+    }
+
+    loadUserProfile()
+  }, [])
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -44,10 +59,15 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     // In a real app, this would clear authentication tokens/state
+    localStorage.removeItem("SessionInformation")
     navigate('/login');
   };
 
-  const addGenre = (genre: string) => {
+  const handleBack = () => {
+    navigate('/'); // Navigate back to main page
+  };
+
+  const addGenre = (genre) => {
     if (genre.trim() && !editForm.favoriteGenres.includes(genre.trim())) {
       setEditForm({
         ...editForm,
@@ -56,7 +76,7 @@ export default function ProfilePage() {
     }
   };
 
-  const removeGenre = (genreToRemove: string) => {
+  const removeGenre = (genreToRemove) => {
     setEditForm({
       ...editForm,
       favoriteGenres: editForm.favoriteGenres.filter(genre => genre !== genreToRemove)
@@ -86,6 +106,9 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="profile-actions">
+          <button className="btn btn-outline" onClick={handleBack}>
+            Back to Music
+          </button>
           {!isEditing ? (
             <button className="btn btn-primary" onClick={handleEdit}>
               Edit Profile
@@ -160,15 +183,15 @@ export default function ProfilePage() {
                   className="form-input"
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
-                      addGenre((e.target as HTMLInputElement).value);
-                      (e.target as HTMLInputElement).value = '';
+                      addGenre(e.target.value);
+                      e.target.value = '';
                     }
                   }}
                 />
                 <button 
                   className="btn btn-small"
                   onClick={() => {
-                    const input = document.querySelector('.genre-input-group input') as HTMLInputElement;
+                    const input = document.querySelector('.genre-input-group input');
                     if (input) {
                       addGenre(input.value);
                       input.value = '';
@@ -221,5 +244,3 @@ export default function ProfilePage() {
     </div>
   );
 }
-
-
