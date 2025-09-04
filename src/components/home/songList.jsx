@@ -12,7 +12,6 @@ export function SongList({ musicList }) {
   const [userPlaylists, setUserPlaylists] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Function to get user playlists
   const getUserPlaylists = async () => {
     try {
       let session = localStorage.getItem("SessionInformation");
@@ -44,7 +43,6 @@ export function SongList({ musicList }) {
     }
   };
 
-  // Load playlists when component mounts
   useEffect(() => {
     if (hasValidToken()) {
       getUserPlaylists().then(setUserPlaylists);

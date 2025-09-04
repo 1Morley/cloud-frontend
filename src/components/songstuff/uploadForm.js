@@ -106,7 +106,7 @@
                 })
             }
 
-            fetch('https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/add-metadata|', request)
+            fetch('https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/uploadMusic', request)
                 .then(resp => resp.json())
                 .then(data => alert(data.message));
 
@@ -123,7 +123,7 @@
         }
 
         try {
-            const response = await fetch("POST https://tt92awdqbf.execute-api.us-east-1.amazonaws.com/upload", {
+            const response = await fetch("https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/upload", {
                 method: "POST",
                 headers: {
                     "Content-Type": "audio/mpeg"
