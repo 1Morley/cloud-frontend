@@ -120,29 +120,29 @@
             }
         }
 
-        const handleFile = async () => {
-        if (!mp3File) {
-            alert("No MP3 file to upload.");
-            return;
-        }
+    //     const handleFile = async () => {
+    //     if (!mp3File) {
+    //         alert("No MP3 file to upload.");
+    //         return;
+    //     }
 
-        try {
-            const response = await fetch("https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/upload", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "audio/mpeg"
-                },
-                body: mp3File
-            });
+    //     try {
+    //         const response = await fetch("https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/upload", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "audio/mpeg"
+    //             },
+    //             body: mp3File
+    //         });
 
-            const data = await response.json();
-            console.log("Upload success:", data);
-            alert(`Upload successful! Music ID: ${data.id}`);
-        } catch (error) {
-            console.error("Upload error:", error);
-            alert("Failed to upload file.");
-        }
-    };
+    //         const data = await response.json();
+    //         console.log("Upload success:", data);
+    //         alert(`Upload successful! Music ID: ${data.id}`);
+    //     } catch (error) {
+    //         console.error("Upload error:", error);
+    //         alert("Failed to upload file.");
+    //     }
+    // };
 
         return (
             <div className="display-container">
