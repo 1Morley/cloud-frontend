@@ -110,7 +110,6 @@ function FormDisplay() {
             .then(resp => resp.json())
             .then(data => alert(data.message));
 
-            handleMetadata
         } catch (error) {
             console.error("Upload error:", error);
             alert("Failed to upload metadata.");

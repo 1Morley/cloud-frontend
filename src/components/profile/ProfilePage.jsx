@@ -20,6 +20,28 @@ export default function ProfilePage() {
 
   //TODO load user profile using playlist data might need to remove the join date and favorite genres
   useEffect(() => {
+    async function getNumberOfPlaylists(user_id) {
+      try {
+        const response = await fetch(`https://9accq9dnfe.execute-api.us-east-1.amazonaws.com/UserPlaylists?userId=${user_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const playlistIds = await response.json();        
+        return playlistIds.length;
+          
+      } catch (error) {
+          console.error('Error fetching playlists:', error);
+          return 0;
+      }
+    }
+
     function loadUserProfile() {
       let session = localStorage.getItem("SessionInformation");
       if (session != null) {
@@ -29,7 +51,7 @@ export default function ProfilePage() {
           setUserProfile({
             username: jwtData['cognito:username'],
             email: jwtData.email,
-            joinDate: 'January 2024', // replace with real join date if available
+            joinDate: 'January 2024',
             favoriteGenres: [],
             totalPlaylists: 0,
             totalSongs: 0
