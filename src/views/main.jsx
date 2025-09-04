@@ -37,7 +37,6 @@ export default function Main() {
 
   function toUpload(){
     navigate("/upload")
-    navigate("/upload")
   }
 
   function isLoggedIn(){
@@ -113,6 +112,7 @@ export default function Main() {
               >
                 Playlist
               </button>
+              {loadMusic}
             </div>
             <div className="center-content">
               {renderContent()}

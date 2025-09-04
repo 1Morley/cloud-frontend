@@ -48,12 +48,13 @@ export default function ProfilePage() {
         let sessionJson = JSON.parse(session);
         if (sessionJson.IdToken) {
           let jwtData = jwtDecode(sessionJson.IdToken);
+          let numberOfPlaylists = getNumberOfPlaylists(jwtData.sub)
           setUserProfile({
             username: jwtData['cognito:username'],
             email: jwtData.email,
             joinDate: 'January 2024',
             favoriteGenres: [],
-            totalPlaylists: 0,
+            totalPlaylists: numberOfPlaylists,
             totalSongs: 0
           });
           setEditForm(userProfile)
