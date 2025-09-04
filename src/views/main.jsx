@@ -37,6 +37,7 @@ export default function Main() {
 
   function toUpload(){
     navigate("/upload")
+    navigate("/upload")
   }
 
   function isLoggedIn(){
@@ -88,6 +89,7 @@ export default function Main() {
 
   return (
     <MusicProvider>
+      {/* <UploadForm></UploadForm> for testing*/}
       <div className="page-wrapper">
         <div className="main-container">
           <div className="nav-left">
