@@ -22,6 +22,7 @@ const uploadContext = createContext({
     setReleaseDate: () => {},
 });
 
+
 export function UploadForm(){
     const [mp3Audio, setMp3Audio] = useState(null);
     const [mp3File, setMp3File] = useState(null);
@@ -87,8 +88,58 @@ function FormInput(){
     )
 }
 
-function FormDisplay(){
-    const {artist, title, producer, releaseDate, imageLink} = useContext(uploadContext);
+function FormDisplay() {
+    const {artist, title, producer, releaseDate, imageLink, mp3File} = useContext(uploadContext);
+
+    const handleMetadata = () => {
+        try{
+            const request = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                MusicId: 1,
+                CoverImage: imageLink,
+                Title: title,
+                ReleaseDate: releaseDate,
+                Artist: artist,
+                Producer: producer
+            })
+        }
+
+        fetch('https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/add-metadata|', request)
+            .then(resp => resp.json())
+            .then(data => alert(data.message));
+
+            handleMetadata
+        } catch (error) {
+            console.error("Upload error:", error);
+            alert("Failed to upload metadata.");
+        }
+    }
+
+    const handleFile = async () => {
+    if (!mp3File) {
+        alert("No MP3 file to upload.");
+        return;
+    }
+
+    try {
+        const response = await fetch("https://ca6z7cf9h2.execute-api.us-east-1.amazonaws.com/upload", {
+            method: "POST",
+            headers: {
+                "Content-Type": "audio/mpeg"
+            },
+            body: mp3File
+        });
+
+        const data = await response.json();
+        console.log("Upload success:", data);
+        alert(`Upload successful! Music ID: ${data.id}`);
+    } catch (error) {
+        console.error("Upload error:", error);
+        alert("Failed to upload file.");
+    }
+};
 
     return (
         <div className="display-container">
@@ -101,22 +152,14 @@ function FormDisplay(){
             </div>
             <img src={imageLink} alt="song cover" />
             <Player />
-            <button className="action-button" onClick={() => {alert("post go here")}}>submit</button>
+            <button className="action-button" onClick={handleMetadata}>submit</button>
         </div>
-    )
+    );
 }
 
-
-const FormDisplayString = ({prompt, value}) =>{
-    return(
-        <div className="songItem">
-            <p className="songTitle">{prompt}: {value}</p>
-        </div>
-    )
-}
 
 function InputMp3(){
-    const {mp3Audio, setMp3File} = useContext(uploadContext);
+    const {setMp3File} = useContext(uploadContext);
     const defaultWarning = "";
     const [warning, setWarning] = useState(defaultWarning);
 
@@ -126,7 +169,7 @@ function InputMp3(){
             const audioURL = URL.createObjectURL(file);
             const audioTest = new Audio(audioURL);
             setWarning(audioTest.length);
-            setMp3File(audioURL);
+            setMp3File(file);
         }
     }
 
@@ -199,7 +242,7 @@ function InputString({setFunction, setValidation, prompt}){
 }
 
 function InputDate(){
-    const {setReleaseDate, releaseDate} = useContext(uploadContext);
+    const {setReleaseDate} = useContext(uploadContext);
 
     const maxDate = new Date(Date.now());
     const year = maxDate.getFullYear();
@@ -234,3 +277,5 @@ function Player(){
         </div>
     )
 }
+
+
